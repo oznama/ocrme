@@ -56,13 +56,10 @@ services:
       JWT_SECRET_KEY: 'ocrme-secretKey-We345ifu'
       FILESYSTEM_TMP: '/tmp/'
       BUCKET_NAME_DEFAULT: 'nanonet-data-test'
-      GOOGLE_APPLICATION_CREDENTIALS: /tmp/keys/keyfile.json
       ROLES_ALLOWED: 'OCRME-GCP'
       PATHS_ALLOWED: '/actuator/info,/v2/api-docs,/configuration/ui,/swagger-resources/**,/configuration/**,/swagger-ui/**,/webjars/**'
     ports:
       - 8992:8992
-    volumes:
-      - ${GJK}:/tmp/keys/keyfile.json:ro
 
   file-service:
     container_name: 'file-service'
