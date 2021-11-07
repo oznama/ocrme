@@ -62,7 +62,7 @@ services:
     ports:
       - 8992:8992
     volumes:
-      - ${GCP_OCRE_KEY_PATH}:/tmp/keys/keyfile.json:ro
+      - ${GJK}:/tmp/keys/keyfile.json:ro
 
   file-service:
     container_name: 'file-service'
