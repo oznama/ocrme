@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ocrme-330502",
+  "private_key_id": "5a114948e715e9b985baf26e43ac3cb1c5ffe5c7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDHJiu2cAL3wuWh\nmQVRRTAbc6un+jJ6Tb27My8ongXVW+QTRgZg2f2VPOpAYeheKflIniuGSkHnBOoM\ngvSiooXFCcWmx3kGtH1hvST7nj111rMZichd4d527/OrFxi7EeSWTGUL1HBXAQR8\nG1k52rzeE0hXTJhQ951scaYqz9ZRpo5ZKPeoVMDVLAoB1mCcvaC80wR1nzPAyfwf\njkMjehVAQ7BAq1UyWj04efYMfNruCN1VuRj1AVl3ZRlzT3cmRBy+8sLWI0Xm6qgK\npm/5lc10HWGQZXiWAYAMPY8fxva3WqWIzymjg5+sxnW0ggzw641eJmgKYQCnZA18\nnbpBoVKDAgMBAAECggEAHyw76m5FIKg6zp1Hxk1otttX0s7oqNlTaiKcbqSxsBCW\ntmefJvjoZzxmRJauy1KRqUrM8FPeVf2gbz3uciizfMDHVhBiQujsuWhkihhecXwe\ng9Bb80ogSwjLYQwX/GxUFiy2InBp90x6+bxELritGKv3BmdAbmgcFbYCdzAaUaRU\nacHp0Zw6Pyeg08wmHC+q7IaQkY9S4SHqk4byh4ZJBJPcIpi2WQIRbNrifPYKCRcc\nYuy3XUfzsaYFlS6M6s07rXogP3TenEWHfJ6ncfVlRYi/qIhwgZU6vS/wkDhev5Yj\nqDxmD61rng5X462l5Ufp0jFObBkvobcv7MiTW+oTQQKBgQDpEnPmHa55CA1fPv6q\nGWOsB3VvT/nCYwkRfMKHIpV45UPtMHngVNz74f7xG7AXP0hKEva6Wk8XBk+uLOv6\nbloewhOifoMShzyAYVFVu2j+E2hWvQHyidJM/1XNqeOvZzVWq9KGtpdAy8+ENuKO\ncdScYDtKN2D2nb8TjFDveo1DwwKBgQDavWwS0E9dtvAgZoKRrwpfNhIhCoxDzLVO\nq0racv3Tnx3W/afOfDrG6TH67NGhdCeKMFPWRpC+5uDCJoFhdXfC86F1BlUMGooJ\n6VaZIsQbIVI6fr0/f96WRfKhOiwfbHjtB9VDO+TDta5pyQxe3iwwHNjL9kVu3ta7\noIGxZhSKQQKBgQC9MLtfmcxcdorUO8BgtwdPRyauWo70mYts5IbLRulqH0BKMsVb\nscdHtyVI9h60YCv/5PDeSBxXJkpbqh9LQ3Rn70Yc6vDeg2Q7GcP6AYyyYXKapgYE\nqJdK5SDzNuqZIQANAKB9tY2FjWs/eYXh9siMvxihn95Xkaje51Fzc1lkHQKBgQCR\n9lyroT2Ut4I83Kq8NCWjqx0l1zgJ9gv2Vu84Hguqrz7mO5VCgDtoiCvF2Ul5h1zr\nJZyMG8Jy4PWSGMe1FQG5oYFX6cXOsdbzDjWvMjfSMsYAKpp2SQlrFXn2hC71ORjo\ncpWoq8rXneCoznPmyjKKWHWChO+IMELyKQTiL8/9AQKBgD6kptEJXt/CkY448Dpx\nbcEACkRx7yASqTOrfaKYlboak5EXa5JwEEg2g2AFJsD6vyRDpOKSaQyYwcJZGsuL\n4XMDiF2Vf+za+lnrtTXERhOHFqdJKzcMtm29R9JDBBSj7y+TJQsEqRsGBgwG3Mii\niYjrQMI26Nc+PfqE9i9uz8jS\n-----END PRIVATE KEY-----\n",
+  "client_email": "ocrme-storage@ocrme-330502.iam.gserviceaccount.com",
+  "client_id": "101333214864887757060",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ocrme-storage%40ocrme-330502.iam.gserviceaccount.com"
+}
