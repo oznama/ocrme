@@ -1,0 +1,110 @@
+version: "3.7"
+services:
+
+  crud-service:
+    container_name: 'crud-service'
+    image: oznama27/ocrme-crud:0.0.1-SNAPSHOT
+    environment:
+      REST_SERVER_PORT: '8990'
+      DB_HOST: '35.184.135.93'
+      DB_PORT: '5432'
+      DB_SCHEMA: 'ocrme_database'
+      DB_USERNAME: 'ocrme'
+      DB_PASSWORD: 'ocrme'
+      JWT_SECRET_KEY: 'ocrme-secretKey-We345ifu'
+      ROLES_ALLOWED: 'OCRME-CRUD'
+      PATHS_ALLOWED: '/actuator/info,/v2/api-docs,/configuration/ui,/swagger-resources/**,/configuration/**,/swagger-ui/**,/webjars/**'
+      SSO_HOST: '172.18.0.5'
+    ports:
+      - 8990:8990
+
+  sso-service:
+    container_name: 'sso-service'
+    depends_on:
+      - crud-service
+    image: oznama27/ocrme-sso:0.0.1-SNAPSHOT
+    environment:
+      REST_SERVER_PORT: '8991'
+      REST_CLIENT_CRUD_CONTEXT: 'http://crud-service:8990/ocrme/api/crud'
+      REST_CLIENT_USER_PATH: '/user'
+      REST_CLIENT_USER_FINDBY_EMAIL_PSWD: '/findByEmailAndPswd'
+      REST_CLIENT_ROLE_PATH: '/role'
+      REST_CLIENT_ROLE_FINDBY_ID: '/find/%d'
+      REST_CLIENT_PERMISSION_PATH: '/permission'
+      REST_CLIENT_PERMISSION_FINDBY_ROLEID: '/findByRoleId/%d'
+      JWT_SECRET_ID: 'ocrme-id-jwt'
+      JWT_SECRET_KEY: 'ocrme-secretKey-We345ifu'
+      JWT_EXPIRATION: 3600000
+      PERMISSION_CRUD: 'OCRME-CRUD'
+    ports:
+      - 8991:8991
+
+# Usage: 
+#   export GCP_KEY_PATH=~/keys/project-key.json 
+#   example 
+#   export GCP_OCRE_KEY_PATH=D:\Santos\google-credentials\ocrme-330502-3a99714503e7.json
+#   docker-compose -f docker-compose.yml -f docker-compose.access.yml
+  gcp-service:
+    container_name: 'gcp-service'
+    image: oznama27/ocrme-gcp:0.0.1-SNAPSHOT
+    environment:
+      JVM_OPTS: >
+        -XX:PermSize=1024m
+        -XX:MaxPermSize=512m
+      REST_SERVER_PORT: '8992'
+      MAX_FILE_SIZE: '50MB'
+      JWT_SECRET_KEY: 'ocrme-secretKey-We345ifu'
+      FILESYSTEM_TMP: '/tmp/'
+      BUCKET_NAME_DEFAULT: 'nanonet-data-test'
+      GOOGLE_APPLICATION_CREDENTIALS: /tmp/keys/keyfile.json
+      ROLES_ALLOWED: 'OCRME-GCP'
+      PATHS_ALLOWED: '/actuator/info,/v2/api-docs,/configuration/ui,/swagger-resources/**,/configuration/**,/swagger-ui/**,/webjars/**'
+    ports:
+      - 8992:8992
+    volumes:
+      - ${GCP_OCRE_KEY_PATH}:/tmp/keys/keyfile.json:ro
+
+  file-service:
+    container_name: 'file-service'
+    depends_on:
+      - gcp-service
+    image: oznama27/ocrme-file:0.0.1-SNAPSHOT
+    environment:
+      REST_SERVER_PORT: '8993'
+      MAX_FILE_SIZE: '50MB'
+      JWT_SECRET_KEY: 'ocrme-secretKey-We345ifu'
+      FILESYSTEM_TMP: '/tmp/'
+      ROLES_ALLOWED: 'OCRME-FILE-PROCESSOR'
+      PATHS_ALLOWED: '/actuator/info,/v2/api-docs,/configuration/ui,/swagger-resources/**,/configuration/**,/swagger-ui/**,/webjars/**'
+      REST_CLIENT_GCP_CONTEXT: 'http://gcp-service:8992/ocrme/api/gcp'
+      REST_CLIENT_GCP_BATCH: '/batch'
+      REST_CLIENT_GCP_RECEIVE: '/recieve'
+      REST_CLIENT_CRUD_CONTEXT: 'http://crud-service:8990/ocrme/api/crud'
+      REST_CLIENT_CALLBACK_PATH: '/callback'
+      REST_CLIENT_CALLBACK_FINDBY_URL: '/findByUrl'
+      REST_CLIENT_CALLBACK_FINDBY_CIA_AND_MODELID: '/findByCompanyIdAndModelId/%d/%s'
+      REST_CLIENT_NANONETS_CONTEXT: 'https://app.nanonets.com/api/v2/OCR/Model/%s/LabelFile/'
+      REST_CLIENT_NANONETS_USERNAME: '0qQpXPGoZsDfryy6zrO4nOQiSgLNV3nM'
+      REST_CLIENT_NANONETS_PASSWORD: ''
+    ports:
+      - 8993:8993
+      
+  client-test:
+    container_name: 'client-test'
+    depends_on:
+      - file-service
+    image: oznama27/ocrme-client-test:0.0.1-SNAPSHOT
+    environment:
+      REST_SERVER_PORT: '80'
+      MAX_FILE_SIZE: '50MB'
+      MODEL_ID : '9eb6f859-4d76-41d3-b925-ab2632dd6b14'
+      REST_CLIENT_LOGIN: 'http://sso-service:8991/ocrme/api/sso/login'
+      REST_CLIENT_FILE_RECIEVE: 'http://file-service:8993/ocrme/api/file/recieve'
+      EMAIL_USERNAME: oziel.naranjo.mystratis@gmail.com
+      EMAIL_PASSWORD: Str@t1sOznama
+      EMAIL_HOST: smtp.gmail.com
+      EMAIL_PORT: 587
+      EMAIL_SMTP_AUTH: 'true'
+      EMAIL_SMTP_STARTTLS: 'true'
+    ports:
+      - 80:80
